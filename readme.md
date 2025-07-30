@@ -124,9 +124,6 @@ In AWS, these are the key configurations for the Load Balancer used in this setu
 - **Simplified Setup**: This setup avoids SSL configuration, HTTPS listener, advanced routing rules, sticky sessions, and auto-scaling — to keep the scope focused and reduce complexity.
 
 ---
----
-
----
 
 ## 👨‍💻 Author
 
