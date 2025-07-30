@@ -114,6 +114,16 @@ Logging is used throughout to make debugging easy:
 > - Health checks
 > - HTTPS (Only HTTP listener for simplicity)
 
+## ⚙️ Parameters in Load Balancer (AWS ELB)
+
+In AWS, these are the key configurations for the Load Balancer used in this setup:
+
+- **Type**: Application Load Balancer (ALB) with IPv4, internet-facing.
+- **Target Group**: Points to the EC2 instance where the app is deployed, with `target-type` as `instance` and port `9000`.
+- **Listener**: Listens on HTTP port `80` and forwards requests to the registered target group.
+- **Simplified Setup**: This setup avoids SSL configuration, HTTPS listener, advanced routing rules, sticky sessions, and auto-scaling — to keep the scope focused and reduce complexity.
+
+---
 ---
 
 ---
