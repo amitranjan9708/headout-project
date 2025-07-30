@@ -61,6 +61,44 @@ The pipeline:
 - GitHub Actions fail-fast with logs available in Actions UI.
 - Docker deploy steps include fallback for container restarts.
 
+## 🛠️ What Can Fail During Script Execution?
+
+When automating deployment with shell scripts, several failure points can occur:
+
+- **Git Clone Failures**  
+  If SSH keys or GitHub access tokens are not configured properly, the `git clone` step will fail.
+
+- **Missing JAR File**  
+  The script assumes the `.jar` file is available at a specific path (e.g., `build/libs/project.jar`). If the project isn't built beforehand, this causes failure.
+
+- **Java App Launch Failure**  
+  If the app crashes due to misconfigured ports, missing environment variables, or internal exceptions, the `java -jar` command will fail.
+
+- **Docker Errors**  
+  Docker image build might fail due to an invalid `Dockerfile`. Running the container may also fail if the required port is already in use or the network is misconfigured.
+
+- **SSH or Permission Issues**  
+  When deploying to an EC2 instance, if the SSH key is invalid, the username is incorrect, or the IP is wrong, deployment will fail.
+
+- **Port Availability**  
+  Port `9000` must be free. If it's already in use, the Java app or Docker container won't start.
+
+---
+
+## 📜 Logging by Scripts
+
+Logging is used throughout to make debugging easy:
+
+- **Shell Script Logs**  
+  Each step logs output via `echo`, showing messages like _“JAR file not found”_ or _“Docker build successful”_.
+
+- **Java Logs**  
+  Output from the Java app is redirected to a file (e.g., `app.log`). This includes server start info and runtime errors.
+
+- **GitHub Actions Logs**  
+  GitHub Actions logs every job and step by default. Any failed step is marked with ❌ and clickable to debug.
+
+
 ---
 
 ## 🌐 Load Balancer Configuration
